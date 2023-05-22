@@ -18,7 +18,6 @@ class UserController extends AbstractController
     {
        $users = $userRepository->findAll();
        return $this->json($users);
-
     }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
@@ -28,12 +27,12 @@ class UserController extends AbstractController
         return $this->json($user);
     }
 
-    #[Route('/', name: 'app_user_new', methods: ['POST'])]
+    #[Route('/new', name: 'app_user_new', methods: ['POST'])]
     public function new(Request $request, UserRepository $userRepository) : Response
     {
         $data = json_decode($request->getContent(), true);
         $user = new User();
-        $user->setUserName($data['userName']);
+        $user->setUserName($data['username']);
         $user->setEmailAddress($data['email']);
 
         $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
