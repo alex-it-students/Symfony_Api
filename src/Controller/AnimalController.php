@@ -19,7 +19,7 @@ class AnimalController extends AbstractController
         return $this->json($animalRepository->findAll());
     }
 
-    #[Route('/new', name: 'app_animal_new', methods: ['POST'])]
+    #[Route('/', name: 'app_animal_new', methods: ['POST'])]
     public function new(Request $request, AnimalRepository $animalRepository,CountryRepository $countryRepository): Response
     {
         // récupérer les data de la requête
@@ -47,7 +47,7 @@ class AnimalController extends AbstractController
         return $this->json($animal);
     }
 
-    #[Route('/{id}/edit', name: 'app_animal_edit', methods: ['PUT'])]
+    #[Route('/{id}', name: 'app_animal_edit', methods: ['PUT'])]
     public function edit(Request $request, AnimalRepository $animalRepository, int $id, CountryRepository $countryRepository): Response
     {
         // récupérer les data de la requête

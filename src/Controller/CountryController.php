@@ -21,7 +21,7 @@ class CountryController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_country_detail', methods: ['GET'])]
-    function detail(CountryRepository $countryRepository, int $id): Response {
+    function show(CountryRepository $countryRepository, int $id): Response {
         $country = $countryRepository->find($id);
         return $this->json($country);
     }
@@ -34,19 +34,6 @@ class CountryController extends AbstractController
 
         $country = new Country();
 
-        // on hydrate l'objet
-        $country->setName($data['name']);
-        $country->setIsoCode($data['isoCode']);
-        // on sauvegarde en base
-        $countryRepository->save($country, true);
-        return $this->json($country);
-    }
-
-    #[Route('/edit/{id}', name: 'app_country_edit', methods: ['PUT'])]
-    function edit(Request $request, CountryRepository $countryRepository, int $id): Response {
-        // on récupère les données de la requête
-        $data = json_decode($request->getContent(), true);
-        $country = $countryRepository->find($id);
         // on hydrate l'objet
         $country->setName($data['name']);
         $country->setIsoCode($data['isoCode']);
